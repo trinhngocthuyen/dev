@@ -1,10 +1,11 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/_base.sh
 
 config_hidden_files() {
     log_info "Config: Show hidden files"
-    [[ "$(defaults read com.apple.finder AppleShowAllFiles)" == "YES" ]] || return 0
+    if [[ "$(defaults read com.apple.finder AppleShowAllFiles)" == "YES" ]]; then
+        return 0
+    fi
     defaults write com.apple.finder AppleShowAllFiles YES
     killall Finder
 }

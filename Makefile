@@ -1,2 +1,2 @@
 install:
-	sh scripts/install.sh
+	mkdir -p tmp && sh scripts/install.sh | tee tmp/install.log

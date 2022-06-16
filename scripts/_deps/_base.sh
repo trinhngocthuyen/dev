@@ -2,8 +2,16 @@
 
 TMP_DIR="/tmp/mv-hub"
 
+_log_color() {
+    echo "\033[$1m$2\033[0m"
+}
+
 log_info() {
-  echo "\033[32;1m$1\033[0m"
+    _log_color "32;1" "$1"
+}
+
+log_warning() {
+    _log_color "33;1" "$1"
 }
 
 ok() {
@@ -29,3 +37,8 @@ install_with_brew() {
 }
 
 mkdir -p ${TMP_DIR}
+
+if [[ ! -d /usr/local/bin ]]; then
+    log_info "Creating /usr/local/bin..."
+    sudo mkdir -p /usr/local/bin
+fi

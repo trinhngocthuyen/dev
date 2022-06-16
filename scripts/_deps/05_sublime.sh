@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/_base.sh
 
 install_sublime_text() {
     trap "ok" RETURN

@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/_base.sh
 
 config_rbenv() {
     if ! (cat ~/.zshrc | grep "rbenv init -") &> /dev/null; then

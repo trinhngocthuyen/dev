@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/_base.sh
 
 _vscode_path() {
     if [[ -d "/Applications/Visual Studio Code.app" ]]; then

@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/_base.sh
 
-if ! (fc-list | grep "Source Code Pro") &> /dev/null; then
+if [[ ! -f ~/Library/Fonts/SourceCodePro-Regular.otf ]]; then
     if [[ ! -d ${TMP_DIR}/source-code-pro ]]; then
         log_info "Installing font Source Code Pro..."
         git clone --depth=1 https://github.com/adobe-fonts/source-code-pro.git ${TMP_DIR}/source-code-pro
