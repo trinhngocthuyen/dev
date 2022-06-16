@@ -1,0 +1,23 @@
+{
+    "workbench.colorTheme": "Chris-Decor",
+    "editor.detectIndentation": false,
+    "editor.fontFamily": "'Source Code Pro', Menlo, Monaco, 'Courier New', monospace",
+    "settingsSync.ignoredSettings": [
+        "-python.venvPath"
+    ],
+    "editor.fontSize": 14,
+    "window.zoomLevel": 1,
+    "explorer.confirmDelete": false,
+    "python.analysis.autoImportCompletions": false,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "[python]": {
+        "editor.tabSize": 4
+    },
+    "python.venvPath": "${workspaceFolder}/.venv",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+    "files.autoSaveDelay": 5000,
+    "files.autoSave": "afterDelay",
+    "files.associations": {
+        "*.swifttemplate": "swift"
+    }
+}
