@@ -17,5 +17,10 @@ install_iterm() {
     git clone --depth=1 https://github.com/mbadolato/iTerm2-Color-Schemes.git ${color_schemes_dir} \
         && ${color_schemes_dir}/tools/import-scheme.sh ${color_schemes_dir}/schemes/Andromeda.itermcolors
 }
+config_iterm () {
+    mkdir -p ~/Library/Application\ Support/iTerm2/DynamicProfiles
+    cp _config/iterm2/profiles.json ~/Library/Application\ Support/iTerm2/DynamicProfiles/profiles.json
+}
 
 install_iterm
+config_iterm
