@@ -17,6 +17,21 @@ config_symlink_subl() {
         sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
     fi
 }
+config_subl_settings() {
+    local user_settings_path=~/Library/Application\ Support/Sublime\ Text/Packages/User/Preferences.sublime-settings
+    if [[ -f "${user_settings_path}" ]]; then
+        mkdir -p /tmp/subl
+        cat "${user_settings_path}" | grep -v -E '^//' > /tmp/subl/Preferences.sublime-settings
+        jq -s '.[0] * .[1]' \
+            _config/subl/Preferences.sublime-settings \
+            /tmp/subl/Preferences.sublime-settings \
+            > "${user_settings_path}"
+    else
+        mkdir -p $(dirname "${user_settings_path}")
+        cp _config/subl/Preferences.sublime-settings "${user_settings_path}"
+    fi
+}
 
 install_sublime_text
 config_symlink_subl
+config_subl_settings

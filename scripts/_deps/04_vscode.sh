@@ -32,8 +32,8 @@ config_vscode_settings() {
     [[ -f ~/Library/Application\ Support/Code/User/settings.json ]] || \
         (log_info "VSCode user settings was absent" && mkdir -p ~/Library/Application\ Support/Code/User && echo  "{}" > ~/Library/Application\ Support/Code/User/settings.json)
     jq -s '.[0] * .[1]' \
-        ~/Library/Application\ Support/Code/User/settings.json \
         _config/vscode/settings.json \
+        ~/Library/Application\ Support/Code/User/settings.json \
         > ${TMP_DIR}/vscode_settings.json
     mv ${TMP_DIR}/vscode_settings.json ~/Library/Application\ Support/Code/User/settings.json
 
