@@ -38,7 +38,10 @@ install_with_brew() {
 
 mkdir -p ${TMP_DIR}
 
-if [[ ! -d /usr/local/bin ]]; then
-    log_info "Creating /usr/local/bin..."
-    sudo mkdir -p /usr/local/bin
+if [[ ! -d /opt/bin ]]; then
+    log_info "Creating /opt/bin..."
+    sudo mkdir -p /opt/bin
+fi
+if ! (cat ~/.zprofile | grep "/opt/bin") &> /dev/null; then
+    echo 'export PATH="${PATH}:/opt/bin"' >> ~/.zprofile
 fi

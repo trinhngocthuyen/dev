@@ -23,7 +23,7 @@ install_vscode() {
 config_symlink_code() {
     if ! which code &> /dev/null; then
         log_info "   Config: Create symlink (code) for VSCode"
-        sudo ln -s "$(_vscode_path)/Contents/Resources/app/bin/code" /usr/local/bin/code
+        sudo ln -s "$(_vscode_path)/Contents/Resources/app/bin/code" /opt/bin/code
     fi
 }
 

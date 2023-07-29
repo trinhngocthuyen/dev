@@ -14,7 +14,7 @@ install_sublime_text() {
 config_symlink_subl() {
     if ! which subl &> /dev/null; then
         log_info "   Config: Create symlink (subl) for Sublime Text"
-        sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+        sudo ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /opt/bin/subl
     fi
 }
 config_subl_settings() {

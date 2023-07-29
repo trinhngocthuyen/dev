@@ -15,8 +15,17 @@ config_zsh() {
     rsync -ra _config/zsh/plugins/ ${zsh_custom_dir}/plugins/
     rsync -ra _config/zsh/themes/ ${zsh_custom_dir}/themes/
 
-    local selected_theme=chris-at-work
+    for path in _config/zsh/plugins/*; do
+        local plugin_name=$(basename ${path})
+        echo "source \"${PWD}/_config/zsh/plugins/${plugin_name}/${plugin_name}.plugin.zsh\"" > ${zsh_custom_dir}/plugins/${plugin_name}/${plugin_name}.plugin.zsh
+    done
 
+    for path in  _config/zsh/themes/*; do
+        local fname=$(basename ${path})
+        echo "source \"${PWD}/_config/zsh/themes/${fname}\"" > ${zsh_custom_dir}/themes/${fname}
+    done
+
+    local selected_theme=chris
     log_info "   Config: Use zsh theme: ${selected_theme}"
     sed -i .bkp "s/ZSH_THEME=.*/ZSH_THEME=${selected_theme}/g" ~/.zshrc
 
@@ -41,6 +50,8 @@ config_zsh() {
         log_info "-> Update plugins: ${plugins_to_activate}"
         sed -i .bkp "s/^plugins=.*/plugins=(${plugins_to_activate})/g" ~/.zshrc
     fi
+
+    rm -rf ~/.zshrc.bkp
 }
 
 install_zsh
