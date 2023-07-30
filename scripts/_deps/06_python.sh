@@ -3,11 +3,12 @@ set -e
 
 install_python() {
     trap "ok" RETURN
-    local DEP="python3.8"
-    [[ -f $(brew --prefix)/opt/python@3.8/bin/python3 ]] || (log_install && brew install python@3.8)
+    local DEP="python@3.10"
+    (brew list | grep python &> /dev/null) || (log_install && brew install ${DEP})
+    local python_libexec_bin=$(brew --prefix)/opt/${DEP}/libexec/bin
 
-    if [[ ! $(cat ~/.zshrc | grep $(brew --prefix)/opt/python@3.8/bin) ]]; then
-        echo 'export PATH="'$(brew --prefix)'/opt/python@3.8/bin:$PATH"' >> ~/.zshrc
+    if [[ ! $(cat ~/.zshrc | grep ${python_libexec_bin}) ]]; then
+        echo "export PATH=\"${python_libexec_bin}:\$PATH\"" >> ~/.zshrc
     fi
 }
 

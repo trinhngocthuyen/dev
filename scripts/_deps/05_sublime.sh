@@ -21,6 +21,9 @@ config_subl_settings() {
     local user_settings_path=~/Library/Application\ Support/Sublime\ Text/Packages/User/Preferences.sublime-settings
     if [[ -f "${user_settings_path}" ]]; then
         mkdir -p /tmp/subl
+        if [[ ! -s "${user_settings_path}" ]]; then
+            echo "{}" > "${user_settings_path}"
+        fi
         cat "${user_settings_path}" | grep -v -E '^//' > /tmp/subl/Preferences.sublime-settings
         jq -s '.[0] * .[1]' \
             _config/subl/Preferences.sublime-settings \

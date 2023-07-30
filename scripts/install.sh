@@ -2,7 +2,7 @@
 set -e
 source $(dirname $0)/_deps/_base.sh
 
-log_info "Running on $() architecture"
+log_info "Running on $(uname -m) architecture"
 
 for file in $(find $(dirname $0)/_deps -depth 1 -name *.sh | sort); do
     source "${file}"

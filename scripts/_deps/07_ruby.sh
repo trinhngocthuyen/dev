@@ -6,11 +6,11 @@ config_rbenv() {
         sed -i.bkp '1s/^/eval "$(rbenv init -)"\n/' ~/.zshrc
     fi
 
-    if ! (rbenv version | grep 2.7.0) &> /dev/null; then
-        log_info "Installing ruby 2.7.0 (via rbenv)..."
-        rbenv install 2.7.0
-        log_info "-> Set global ruby version: 2.7.0"
-        rbenv global 2.7.0
+    if ! (rbenv version | grep 3.0.0) &> /dev/null; then
+        log_info "Installing ruby 3.0.0 (via rbenv)..."
+        rbenv install 3.0.0
+        log_info "-> Set global ruby version: 3.0.0"
+        rbenv global 3.0.0
     fi
 }
 
