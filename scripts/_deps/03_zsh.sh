@@ -17,7 +17,7 @@ config_zsh() {
         local dst=${src/_config\/zsh/${zsh_custom_dir}}
         log_debug "Link: ${dst} -> ${src}"
         mkdir -p $(dirname ${dst})
-        echo "source \"${src}\"" > ${dst}
+        echo "source \"${PWD}/${src}\"" > ${dst}
     done
 
     local selected_theme=chris
