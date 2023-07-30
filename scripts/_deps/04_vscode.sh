@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+CODE_BIN=/opt/bin/code
+
 _vscode_path() {
     if [[ -d "/Applications/Visual Studio Code.app" ]]; then
         echo "/Applications/Visual Studio Code.app"
@@ -21,9 +23,9 @@ install_vscode() {
 }
 
 config_symlink_code() {
-    if ! which code &> /dev/null; then
+    if [[ ! -f ${CODE_BIN} ]]; then
         log_info "   Config: Create symlink (code) for VSCode"
-        sudo ln -s "$(_vscode_path)/Contents/Resources/app/bin/code" /opt/bin/code
+        sudo ln -s "$(_vscode_path)/Contents/Resources/app/bin/code" ${CODE_BIN}
     fi
 }
 
@@ -38,7 +40,7 @@ config_vscode_settings() {
     mv ${TMP_DIR}/vscode_settings.json ~/Library/Application\ Support/Code/User/settings.json
 
     log_info "Config: VSCode - Install extensions"
-    local existing_extensions=$(code --list-extensions)
+    local existing_extensions=$(${CODE_BIN} --list-extensions)
     local extensions=(
         ms-python.python
         ms-python.vscode-pylance
@@ -53,7 +55,7 @@ config_vscode_settings() {
             log_info "-> Extension: ${extension} exists!"
         else
             log_info "-> Extension: ${extension} -> Installing..."
-            code --install-extension ${extension}
+            ${CODE_BIN} --install-extension ${extension}
         fi
     done
 }
