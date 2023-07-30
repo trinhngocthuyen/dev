@@ -12,17 +12,12 @@ install_zsh() {
 config_zsh() {
     log_info "Config: Oh My Zsh"
     zsh_custom_dir=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
-    rsync -ra _config/zsh/plugins/ ${zsh_custom_dir}/plugins/
-    rsync -ra _config/zsh/themes/ ${zsh_custom_dir}/themes/
 
-    for path in _config/zsh/plugins/*; do
-        local plugin_name=$(basename ${path})
-        echo "source \"${PWD}/_config/zsh/plugins/${plugin_name}/${plugin_name}.plugin.zsh\"" > ${zsh_custom_dir}/plugins/${plugin_name}/${plugin_name}.plugin.zsh
-    done
-
-    for path in  _config/zsh/themes/*; do
-        local fname=$(basename ${path})
-        echo "source \"${PWD}/_config/zsh/themes/${fname}\"" > ${zsh_custom_dir}/themes/${fname}
+    for src in $(find _config/zsh -name '*.zsh*'); do
+        local dst=${src/_config\/zsh/${zsh_custom_dir}}
+        log_debug "Link: ${dst} -> ${src}"
+        mkdir -p $(dirname ${dst})
+        echo "source \"${src}\"" > ${dst}
     done
 
     local selected_theme=chris

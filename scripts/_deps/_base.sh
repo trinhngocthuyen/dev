@@ -6,6 +6,10 @@ _log_color() {
     echo "\033[$1m$2\033[0m"
 }
 
+log_debug() {
+    echo $@
+}
+
 log_info() {
     _log_color "32;1" "$1"
 }
