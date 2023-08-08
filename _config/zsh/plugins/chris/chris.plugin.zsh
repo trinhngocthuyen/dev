@@ -39,3 +39,10 @@ function rebase_with_upstream() {
     git fetch origin ${default_branch}
     git rebase FETCH_HEAD
 }
+
+function pyformat() {
+    local dir="${1:-.}"
+    isort "${dir}"
+    autoflake -r -i --remove-all-unused-imports --remove-unused-variables "${dir}"
+    black --skip-string-normalization "${dir}"
+}

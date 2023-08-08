@@ -1,2 +1,2 @@
 install:
-	mkdir -p tmp && sh scripts/install.sh | tee tmp/install.log
+	python3 install.py
