@@ -1,3 +1,4 @@
+import contextlib
 import json
 import logging
 import os
@@ -19,6 +20,15 @@ class Installer:
 
     def cleanup(self):
         shutil.rmtree(self.tmp_dir)
+
+    def bin(self, p: StrPath):
+        def fn(*args, **kwargs):
+            cmd = f'source {self.quote(self.zprofile_path)} && {p}'
+            if args:
+                cmd = '{} {}'.format(cmd, ' '.join(args))
+            return self.sh(cmd, **kwargs)
+
+        return fn
 
     @cached_property
     def zprofile_path(self) -> Path:
@@ -50,10 +60,12 @@ class Installer:
     def is_m1(self) -> bool:
         return self.platform_processor == 'arm'
 
-    def check_cmd(self, cmd: str) -> t.Optional[str]:
-        if bin := shutil.which(cmd):
-            self.log_installed(cmd)
-            return bin
+    @contextlib.contextmanager
+    def can_fail(self):
+        try:
+            yield
+        except Exception as e:
+            self.log.warning(f'An error has occurred: {e}. This error is tolerated')
 
     def subprocess(self, *args, **kwargs) -> subprocess.CompletedProcess:
         return subprocess.run(*args, **kwargs)
@@ -90,12 +102,12 @@ class Installer:
             self.sh(f'unzip -q {self.quote(save_to)} -d {self.quote(save_to.parent)}')
 
     def install_with_brew(self, formula: str):
-        brew = f'source {self.quote(self.zprofile_path)} && {self.brew_prefix}/bin/brew'
-        if not self.sh(f'({brew} list | grep {formula}) &> /dev/null').returncode:
+        brew = self.bin(f'{self.brew_prefix}/bin/brew')
+        if not brew(f'list | grep {formula}').returncode:
             return self.log_installed(formula)
         self.log.debug(f'{formula} was not installed')
         self.log.debug(f'-> Install {formula}')
-        self.sh(f'{brew} install {formula}')
+        brew(f'install {formula}')
 
     def insert_content(self, path: StrPath, content: str, prepend=False):
         path = Path(path).expanduser()

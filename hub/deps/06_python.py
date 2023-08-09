@@ -20,13 +20,14 @@ class PythonInstaller(Installer):
         self.insert_content(self.zprofile_path, line)
 
     def install_common_packages(self):
-        python = (
-            f'source {self.quote(self.zprofile_path)} && {self.libexec_bin_path}/python'
-        )
+        python = self.bin(f'{self.libexec_bin_path}/python')
         packages = [
             'isort',
             'black',
             'autoflake',
+            'ipython',
+            'jupyterlab',
         ]
-        self.sh(f'{python} -m ensurepip --upgrade')
-        self.sh(f'{python} -m pip install ' + ' '.join(packages))
+        with self.can_fail():
+            python(f'-m ensurepip --upgrade')
+            python(f'-m pip install ' + ' '.join(packages))
