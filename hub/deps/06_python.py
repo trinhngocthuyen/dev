@@ -22,6 +22,7 @@ class PythonInstaller(Installer):
     def install_common_packages(self):
         python = self.bin(f'{self.libexec_bin_path}/python')
         packages = [
+            'virtualenv',
             'isort',
             'black',
             'autoflake',
