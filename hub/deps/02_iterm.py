@@ -14,7 +14,7 @@ class ItermInstaller(Installer):
 
     def download_iterm(self):
         self.download(
-            'https://iterm2.com/downloads/stable/iTerm2-3_4_9.zip',
+            'https://iterm2.com/downloads/stable/iTerm2-3_4_19.zip',
             save_to=f'{self.tmp_dir}/iTerm.zip',
             unzip=True,
         )
