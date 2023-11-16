@@ -15,6 +15,10 @@ StrPath = t.Union[str, Path]
 
 
 class Installer:
+    @cached_property
+    def name(self) -> str:
+        return self.__class__.__name__.removesuffix('Installer').lower()
+
     def run(self):
         pass
 
