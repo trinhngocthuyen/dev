@@ -20,6 +20,6 @@ class BrewInstaller(Installer):
 
     def install_common_formulas(self):
         with self.can_fail():
-            formulas = ['jq', 'xcbeautify', 'swiftlint', 'hugo']
+            formulas = ['jq', 'xcbeautify', 'swiftlint', 'hugo', 'node']
             for formula in formulas:
                 self.install_with_brew(formula)

@@ -27,6 +27,10 @@ function git_default_branch() {
     git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
 }
 
+function git_clone_shallow() {
+    git clone --depth=1 --single-branch "$1"
+}
+
 function switch_and_fetch() {
     local default_branch=$(git_default_branch)
     git checkout -f ${default_branch}
@@ -45,4 +49,10 @@ function pyformat() {
     isort "${dir}"
     autoflake -r -i --remove-all-unused-imports --remove-unused-variables "${dir}"
     black --skip-string-normalization "${dir}"
+}
+
+function cleanup_branch() {
+    if [[ "$1" != "" ]]; then
+        git branch | grep "$1" | xargs -I x git branch -D x
+    fi
 }
