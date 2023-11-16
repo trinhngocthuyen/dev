@@ -1,7 +1,6 @@
-# mv Hub
+# Chris's Dev Center
 
-This is a hub of my installations/settings, used when switching laptops.
-
+To install all programs & configs:
 ```sh
 make install
 ```
