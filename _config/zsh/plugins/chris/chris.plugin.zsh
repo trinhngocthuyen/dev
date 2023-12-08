@@ -24,7 +24,7 @@ function sim_record() {
 }
 
 function git_default_branch() {
-    git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+    (git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null || echo main) | sed 's@^refs/remotes/origin/@@'
 }
 
 function git_clone_shallow() {
