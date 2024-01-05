@@ -28,6 +28,7 @@ class PythonInstaller(Installer):
             'autoflake',
             'ipython',
             'jupyterlab',
+            'pre-commit',
         ]
         with self.can_fail():
             python(f'-m ensurepip --upgrade')
