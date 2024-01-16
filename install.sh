@@ -2,11 +2,12 @@
 set -e
 
 clone_if_needed() {
-    if [[ ${CLONE} != "false" ]]; then
-        local WORKING_DIR=/var/tmp/dev
-        rm -rf ${WORKING_DIR}
-        git clone --single-branch --depth 1 https://github.com/trinhngocthuyen/dev.git ${WORKING_DIR} && cd ${WORKING_DIR}
-    fi
+    local WORKING_DIR=~/projects/dev
+    [[ ${CLONE} != "false" ]] || return 0
+    [[ $(PWD) != ${WORKING_DIR} ]] || return 0
+
+    rm -rf ${WORKING_DIR}
+    git clone --single-branch --depth 1 https://github.com/trinhngocthuyen/dev.git ${WORKING_DIR} && cd ${WORKING_DIR}
 }
 
 clone_if_needed
