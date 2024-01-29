@@ -18,6 +18,12 @@
     "files.autoSaveDelay": 5000,
     "files.autoSave": "afterDelay",
     "files.associations": {
-        "*.swifttemplate": "swift"
+        "*.swifttemplate": "swift",
+        "Fastfile": "ruby",
+        "Gemfile": "ruby",
+        "Podfile": "ruby",
+        "*.podspec": "ruby",
+        "*.lock": "yaml",
+        "*.env-*": "env"
     }
 }
