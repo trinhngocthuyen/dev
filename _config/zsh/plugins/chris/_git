@@ -1,0 +1,26 @@
+function git_default_branch() {
+    (git symbolic-ref refs/remotes/origin/HEAD 2> /dev/null || echo main) | sed 's@^refs/remotes/origin/@@'
+}
+
+function git_clone_shallow() {
+    git clone --depth=1 --single-branch "$1"
+}
+
+function switch_and_fetch() {
+    local default_branch=$(git_default_branch)
+    git checkout -f ${default_branch}
+    git reset --hard && git clean -df
+    git pull origin ${default_branch}
+}
+
+function rebase_with_upstream() {
+    local default_branch=$(git_default_branch)
+    git fetch origin ${default_branch}
+    git rebase FETCH_HEAD
+}
+
+function cleanup_branch() {
+    if [[ "$1" != "" ]]; then
+        git branch | grep "$1" | xargs -I x git branch -D x
+    fi
+}

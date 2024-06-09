@@ -79,7 +79,7 @@ class ZshInstaller(Installer):
 
         to_clone = {'zsh-autosuggestions', 'zsh-syntax-highlighting'}
         to_activate = current_plugins.union(to_clone).union(
-            {'last-working-dir', 'chris'}
+            {'git', 'python', 'swiftpm', 'last-working-dir', 'chris'}
         )
         for plugin in to_clone:
             plugin_dir = self.zsh_custom_dir / 'plugins' / plugin

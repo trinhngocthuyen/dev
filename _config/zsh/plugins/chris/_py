@@ -1,0 +1,6 @@
+function py_format() {
+    local dir="${1:-.}"
+    isort "${dir}"
+    autoflake -r -i --remove-all-unused-imports --remove-unused-variables "${dir}"
+    black --skip-string-normalization "${dir}"
+}
