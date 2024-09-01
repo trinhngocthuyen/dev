@@ -1,0 +1,4 @@
+if [[ "$TERM_PROGRAM" == "vscode" && -f ".env" ]]; then
+  source .env && \
+  echo "✔ Loaded .env"
+fi

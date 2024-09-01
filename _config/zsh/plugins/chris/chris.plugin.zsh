@@ -9,7 +9,5 @@ alias stree="open -a Sourcetree"
 alias code="open -a \"$(ls /Applications | grep -E '(Visual Studio|VS)Code')\""
 alias subl="open -a \"$(ls /Applications | grep -E 'Sublime Text')\""
 
-source "${0:A:h}/_git"
-source "${0:A:h}/_ios"
-source "${0:A:h}/_py"
-source "${0:A:h}/_misc"
+for child in ${0:A:h}/_*; do source "${child}"; done
+unset child

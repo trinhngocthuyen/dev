@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source $(dirname $0)/../base.sh
+source ${0:A:h}/../base.sh
 
 if which pre-commit &> /dev/null; then
     log_info -b pre-commit was installed at: $(which pre-commit)
