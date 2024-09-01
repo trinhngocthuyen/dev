@@ -1,6 +1,8 @@
-if [ -n "`which swift`" ]; then
-    eval "`swift package completion-tool generate-bash-script`"
-fi
+# Temporarily disable this as it's kinda slow
+# if [ -n "`which swift`" ]; then
+#     eval "`swift package completion-tool generate-bash-script`"
+# fi
+
 export COCOA_PODS_ENV=development
 
 function nm_swift() {

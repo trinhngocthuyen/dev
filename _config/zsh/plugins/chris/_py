@@ -4,3 +4,7 @@ function py_format() {
     autoflake -r -i --remove-all-unused-imports --remove-unused-variables "${dir}"
     black --skip-string-normalization "${dir}"
 }
+
+function clean_pycache() {
+    find . -type d -name __pycache__ -exec rm -rf {} \;
+}

@@ -24,3 +24,9 @@ function cleanup_branch() {
         git branch | grep "$1" | xargs -I x git branch -D x
     fi
 }
+
+function git_config_personal_repo() {
+    git config user.email trinhngocthuyen@gmail.com
+    git config user.name "Thuyen Trinh"
+    echo "-> User: $(git config user.name) ($(git config user.email))"
+}
